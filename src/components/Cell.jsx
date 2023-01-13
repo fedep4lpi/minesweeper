@@ -21,7 +21,7 @@ const Cell = ({ isFlagged, isRevealed, isBomb, value, parentIndex, index }) => {
             gameContext.setField((field) => {
 
                 field = cleanNeighbours(field, parentIndex, index)
-                field = getValues(field, parentIndex, index)
+                field = getValues(field)
                 field[parentIndex][index].isRevealed=true
 
                 return[...field]
