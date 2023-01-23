@@ -24,6 +24,8 @@ const Cell = ({ isFlagged, isRevealed, isBomb, value, parentIndex, index }) => {
                 field = getValues(field)
                 field[parentIndex][index].isRevealed=true
 
+                field = revealNeighbours(field, parentIndex, index)
+
                 return[...field]
             })
         } 
@@ -33,8 +35,14 @@ const Cell = ({ isFlagged, isRevealed, isBomb, value, parentIndex, index }) => {
 
                 field[parentIndex][index].isRevealed=true
 
+                if(value===0 && !isBomb) {
+                    field = revealNeighbours(field, parentIndex, index)
+                }
+
                 return[...field]
             })
+
+            
         }
     }
 
@@ -98,16 +106,6 @@ const Cell = ({ isFlagged, isRevealed, isBomb, value, parentIndex, index }) => {
                 alt='boom!'
             />
         )
-    }
-
-    if(value===0) {
-
-        gameContext.setField((field) => {
-            
-            field = revealNeighbours(field, parentIndex, index)
-
-            return[...field]
-        })
     }
 
     return (
